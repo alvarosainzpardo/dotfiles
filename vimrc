@@ -1,5 +1,6 @@
 " Don't try to be vi compatible
-if &compatible | set nocompatible | endif " Avoid side effects if `nocp` already set
+" Avoid possible side effects if `nocompatible` is already set
+if &compatible | set nocompatible | endif
 
 " Display line numbers
 set number
