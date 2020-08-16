@@ -1,6 +1,7 @@
 # dotfiles
 
-Repositorio de archivos de configuración:
+Config files repository
 
-* vimrc: vim (~/.vimrc)
-* config: cliente ssh (~/.ssh/config)
+## Install
+
+Run `setup.sh`. It's self explanatory.
