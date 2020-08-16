@@ -1,6 +1,0 @@
-Host *
-  ProxyCommand nc -X connect -x proxyinternet.tesa:8080 %h %p
-  ServerAliveInterval 10
-
-Host sulaco.ttcloud.net
-  IdentityFile /cygdrive/d/Users/Alvaro/Dropbox/Personal/Fiware/fiware-spain2.pem

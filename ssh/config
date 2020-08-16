@@ -1,0 +1,68 @@
+Host *
+# ProxyCommand nc -X connect -x proxyinternet.tesa:8080 -P ds01170:14Debian %h %p
+  ServerAliveInterval 10
+# RemoteForward 52698 localhost:52698
+
+Host github-telefonica.com
+  Hostname github.com
+  User git
+  IdentityFile ~/.ssh/id_rsa_telefonica
+
+Host github-alvarosainzpardo.com
+  Hostname github.com
+  User git
+  IdentityFile ~/.ssh/id_rsa_alvarosainzpardo
+
+Host sulaco
+  Hostname sulaco.sainzpardo.com
+  User asainz
+  LocalForward 5901 localhost:5901
+
+Host sulaco-fiware
+  Hostname sulaco.ttcloud.net
+  User asainz
+  IdentityFile ~/.ssh/fiware-spain2.pem
+# LocalForward 3306 172.17.0.2:3306
+
+Host scuma-pro-core
+  Hostname 150.214.58.177
+  Port 2202
+  User iotp
+
+Host scuma-pro-mysql
+  Hostname 150.214.58.177
+  Port 2204
+  User sysadmin
+  LocalForward 3306 localhost:3306
+
+Host scuma-pro-pentaho
+  Hostname 150.214.58.177
+  Port 2206
+  User sysadmin
+  LocalForward 8443 localhost:8443
+# LocalForward 3306 192.168.86.139:3306
+# LocalForward 8443 192.168.86.141:8443
+
+Host scuma-pro-ckan
+  Hostname 150.214.58.177
+  Port 2203
+  User sysadmin
+
+Host scuma-pro-desktop
+  Hostname 150.214.58.177
+  Port 2207
+  User asainz
+  LocalForward 5911 localhost:5901
+  LocalForward 5912 localhost:5902
+
+Host scuma-pro-desktop-02
+  Hostname 150.214.58.177
+  Port 2208
+  User asainz
+  LocalForward 5921 localhost:5901
+  LocalForward 5922 localhost:5902
+
+Host urbo2
+  Hostname demo.urbo2.es
+  User ansible
+  IdentityFile ~/.ssh/id_rsa_urbo2
