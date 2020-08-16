@@ -1,12 +1,14 @@
 #!/bin/bash
 
+BASEDIR=$(dirname $(realpath "$BASH_SOURCE"))
+
 main_menu()
 {
   whiptail --title 'Main menu' --menu 'Choose an option' 20 60 10 \
     'Deps'  'Install software this script depends on' \
     'Vim'   'Install vim 8 and Ubuntu powerline font' \
     'Other' 'Install other software' \
-    'Exit'  'Exit script' \
+    'Quit'  'Exit script' \
     3>&1 1>&2 2>&3
 }
 
@@ -23,11 +25,27 @@ setup_gitconfig()
 EOF
 }
 
+setup_ssh()
+{
+  if ! [ -d ~/.ssh ]
+  then
+    mkdir ~/.ssh
+  fi
+  cp $BASEDIR/ssh/config ~/.ssh/config
+  cp $BASEDIR/ssh/config ~/.ssh/config.home
+  cp $BASEDIR/ssh/config ~/.ssh/config.telefonica
+  chmod 700 ~/.ssh
+  chmod 600 ~/.ssh/config*
+}
+
 install_deps()
 {
   sudo apt update
   sudo apt install -y git wget curl build-essential
   setup_gitconfig
+  setup_ssh
+  local message='Git and ssh are configured. Now you have to quit and copy your private keys id_rsa, id_rsa_alvarosainzpardo and id_rsa_telefonica to ~/.ssh before using this script'
+  whiptail --msgbox "$message" 10 60
 }
 
 install_vim()
@@ -51,9 +69,7 @@ install_other()
   echo "deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main" | sudo tee /etc/apt/sources.list.d/teams.list
   sudo apt update
   sudo apt install teams
-  local message='The following packages were installed: 
-
-teams'
+  local message='The following packages were installed: teams'
   whiptail --msgbox "$message" 10 60
 }
 
@@ -70,7 +86,7 @@ do
     'Other')
       install_other
       ;;
-    'Exit')
+    'Quit')
       exit 0
       ;;
     *)
